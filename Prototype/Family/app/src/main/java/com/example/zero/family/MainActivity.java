@@ -1,17 +1,31 @@
 package com.example.zero.family;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 
-public class MainActivity extends ActionBarActivity implements MainPage.OnFragmentInteractionListener,MapCommunity.OnFragmentInteractionListener,
+public class MainActivity extends Activity implements MainPage.OnFragmentInteractionListener,MapCommunity.OnFragmentInteractionListener,
         Sharing.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener{
 
+
+    public void ToNews(String news){
+        getFragmentManager().beginTransaction()
+                .replace(R.id.place_holder,new MainPage())
+                .addToBackStack(null)
+                .commit();
+    }
     public void JumptoMainpage(String info)
     {
         getFragmentManager().beginTransaction()
@@ -28,24 +42,55 @@ public class MainActivity extends ActionBarActivity implements MainPage.OnFragme
                 .commit();
     }
 
-    public void sendPositionToDetail(int position) {
+    public void sendPositionToDetail(String name) {
         getFragmentManager().beginTransaction()
-                .replace(R.id.place_holder,DetailFragment.newInstance(position))
+                .replace(R.id.place_holder,DetailFragment.newInstance(name))
                 .addToBackStack(null)
                 .commit();
 
     }
-    public void onFragmentInteraction(Uri uri){
 
+    public void sendPositionToFragment2(String Cname) {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.place_holder,Detail.newInstance(Cname))
+                .addToBackStack(null)
+                .commit();
     }
+
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_main);
-        getFragmentManager().beginTransaction()
-                .add(R.id.place_holder, new LoginFragment())
-                .addToBackStack(null)
-                .commit();
+
+        PackageManager pm = getPackageManager();
+        try {
+            PackageInfo pi = pm.getPackageInfo("com.lyt.android", 0);
+            // TextView versionNumber = (TextView)
+            // findViewById(R.id.versionNumber);
+            // versionNumber.setText("Version " + pi.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                getFragmentManager().beginTransaction()
+                        .add(R.id.place_holder,new LoginFragment())
+                        .addToBackStack(null)
+                        .commit();
+              //  finish();
+            }
+        }, 2500);
+
     }
 
 
@@ -72,12 +117,7 @@ public class MainActivity extends ActionBarActivity implements MainPage.OnFragme
     }
 
 
-    public void sendPositionToFragment2(String Cname) {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.place_holder,Detail.newInstance(Cname))
-                .addToBackStack(null)
-                .commit();
-    }
+
 
     @Override
     public void onBackPressed()

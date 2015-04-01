@@ -71,7 +71,7 @@ public class MainPage extends ListFragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String info) {
         if (mListener != null) {
-            mListener.JumptoSharing(info);
+            mListener.sendPositionToDetail(info);
         }
     }
 
@@ -81,7 +81,8 @@ public class MainPage extends ListFragment {
         super.onListItemClick(l, v, position, id);
         if(mListener!=null)
         {
-            mListener.sendPositionToDetail(position);
+            String Cname = "nihao";
+            mListener.sendPositionToDetail(Cname);
         }
     }
 
@@ -114,8 +115,8 @@ public class MainPage extends ListFragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void sendPositionToDetail(int position);
-        public void JumptoSharing(String info);
+        public void sendPositionToDetail(String name);
+       public void JumptoSharing(String info);
     }
 
 

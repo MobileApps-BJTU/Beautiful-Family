@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.example.zero.family.DetailFragment">
+    android:layout_height="match_parent" tools:context="com.example.zero.family.DetailFragment"
+    android:background="#ffffff">
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/detailText"
-        android:text="@string/hello_blank_fragment"
+        android:text="1.Get up at 6:30 after a night of sleep, first drink 250 ml water"
         android:layout_gravity="center_vertical"
         android:layout_below="@+id/imageView1"
         android:textSize="15sp"

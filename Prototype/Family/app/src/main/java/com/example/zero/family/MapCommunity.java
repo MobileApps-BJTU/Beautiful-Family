@@ -50,6 +50,11 @@ public class MapCommunity extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO �Զ����ɵķ������
+                if (mListener != null) {
+
+                    String Cname = "nihao";
+                    mListener.ToNews(Cname);
+                }
                 Toast.makeText(getActivity().getApplicationContext(), "Ĭ��Toast��ʽ", Toast.LENGTH_SHORT).show();
             }
         });
@@ -60,9 +65,19 @@ public class MapCommunity extends Fragment {
                 // TODO �Զ����ɵķ������
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
                     //�������ð���ʱ�ı���ͼƬ
+                    if (mListener != null) {
+
+                        String Cname = "nihao";
+                        mListener.ToNews(Cname);
+                    }
                     ((ImageView)v).setImageDrawable(getResources().getDrawable(R.drawable.fours));
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     //���޸�Ϊ̧��ʱ������ͼƬ
+                    if (mListener != null) {
+
+                        String Cname = "nihao";
+                        mListener.ToNews(Cname);
+                    }
                     ((ImageView)v).setImageDrawable(getResources().getDrawable(R.drawable.ones));
                 }
                 return true;
@@ -72,9 +87,9 @@ public class MapCommunity extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(String news) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.ToNews(news);
         }
     }
 
@@ -107,7 +122,7 @@ public class MapCommunity extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void ToNews(String news);
     }
 
 
@@ -141,10 +156,11 @@ public class MapCommunity extends Fragment {
                 if (lastClick1 - firstClick1 < 500)
                 {
                     //((ImageView)v).setImageDrawable(getResources().getDrawable(R.drawable.sixs));
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.place_holder,new MainPage())
-                            .addToBackStack(null)
-                            .commit();
+                    if (mListener != null) {
+
+                        String Cname = "nihao";
+                        mListener.ToNews(Cname);
+                    }
                    /* Intent intent = new Intent();
                     intent.setClass(MapCommunity.this, MapCommunity.class);
                     startActivity(intent);*/
